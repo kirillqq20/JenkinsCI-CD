@@ -45,7 +45,7 @@ pipeline {
                 script {
                     sh """
                         docker-compose -f ${env.DC_FILE} down ${env.APP_NAME} || true
-                        docker-compose -f ${env.DC_FILE} pull ${env.APP_NAME}
+                        docker-compose -f ${env.DC_FILE} pull ${env.APP_NAME}:${env.APP_VERSION}
                         docker network create test-network || true
                         docker-compose -f ${env.DC_FILE} up -d ${env.APP_NAME}
                     """
