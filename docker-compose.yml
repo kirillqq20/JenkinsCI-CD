@@ -3,7 +3,7 @@ version: '3'
 services:
   golf7-sale:
     image: kirillqq20/golf7-sale
-    container_name: kirillqq20/golf7-sale
+    container_name: golf7-sale
     restart: unless-stopped
     ports:
       - '2222:80'
