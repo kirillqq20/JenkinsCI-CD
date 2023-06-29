@@ -41,15 +41,6 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                dir('build') {
-                    sh 'ls -la'
-                    sh 'pwd'
-                }
-            }
-        }
-
         stage('Build') {
             steps {
                     sh "docker build -t $DOCKER_IMAGE ."
