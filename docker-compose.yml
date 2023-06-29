@@ -2,7 +2,7 @@ version: '3'
 
 services:
   golf7-sale:
-    image: ${env.DOCKER_USER}/${env.APP_NAME}:${env.APP_VERSION}
+    image: ${IMAGE}
     container_name: $APP_NAME
     restart: unless-stopped
     ports:
