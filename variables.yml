@@ -1,4 +1,5 @@
 app_name: golf7-sale
 docker_user: kirillqq20
 app_version: latest
+service_name: golf7-sale
 dc_file: docker-compose.yml

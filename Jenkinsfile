@@ -20,6 +20,7 @@ pipeline {
                     env.DOCKER_USER = variables.docker_user
                     env.APP_VERSION = variables.app_version
                     env.DC_FILE = variables.dc_file
+                    env.SERVICE_NAME = variables.service_name
                 }
             }
         }
@@ -44,10 +45,10 @@ pipeline {
             steps {
                 script {
                     sh """
-                        docker-compose -f ${env.DC_FILE} down ${env.APP_NAME}:${env.APP_VERSION} || true
-                        docker-compose -f ${env.DC_FILE} pull ${env.DOCKER_USER}/${env.APP_NAME}:${env.APP_VERSION}
-                        docker network create golf-network || true
-                        docker-compose -f ${env.DC_FILE} up -d ${env.APP_NAME}:${env.APP_VERSION}
+                        docker-compose -f ${env.DC_FILE} down ${env.SERVICE_NAME} || true
+                        docker-compose -f ${env.DC_FILE} pull ${env.SERVICE_NAME}
+                        docker network create golf7-network || true
+                        docker-compose -f ${env.DC_FILE} up -d ${env.SERVICE_NAME}
                     """
                 }
             }

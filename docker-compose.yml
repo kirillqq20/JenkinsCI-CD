@@ -2,7 +2,7 @@ version: '3'
 
 services:
   golf7-sale:
-    image: $DOCKER_IMAGE
+    image: ${env.DOCKER_USER}/${env.APP_NAME}:${env.APP_VERSION}
     container_name: $APP_NAME
     restart: unless-stopped
     ports:
@@ -11,4 +11,4 @@ services:
 networks:
   default:
     external:
-      name: golf-network
+      name: golf7-network
