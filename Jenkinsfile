@@ -23,26 +23,6 @@ pipeline {
             }
         }
         
-        stage('Delete previous build') {
-            steps {
-                script {
-                    def previousBuildExists = false
-                    try {
-                        sh "docker inspect ${env.DOCKER_IMAGE}"
-                        previousBuildExists = true
-                    } catch (Exception ignored) {
-                        // Docker image does not exist, no need to delete
-                    }
-
-                    if (previousBuildExists) {
-                        sh "docker rmi -f ${env.DOCKER_IMAGE}"
-                    } else {
-                        echo "No previous build found, skipping deletion."
-                    }
-                }
-            }
-        }
-
         stage('Build') {
             steps {
                 sh "docker build -t ${env.DOCKER_IMAGE} ."
