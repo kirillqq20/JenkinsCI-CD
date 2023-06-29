@@ -43,7 +43,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                    sh "docker build -t $DOCKER_IMAGE ."
+                    sh "docker build -t ${DOCKER_IMAGE} ."
                 }
         }
 
@@ -52,7 +52,7 @@ pipeline {
                 // Log in to Docker Hub with token
                 withDockerRegistry(url: 'https://index.docker.io/v1/', credentialsId: 'dockerhub') {
                 // Push the Docker images to Docker Hub
-                sh 'docker push $DOCKER_IMAGE'
+                sh 'docker push ${DOCKER_IMAGE}'
                 }
             }
         }
