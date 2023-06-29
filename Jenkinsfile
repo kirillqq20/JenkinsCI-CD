@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/kirillqq20/automatic_docker_release_php.git'
+                    url: 'git@github.com:kirillqq20/jenkinsCI-CD.git'
             }
         }
     stage('Load Variables') {
