@@ -46,7 +46,7 @@ pipeline {
                 script {
                     sh """
                         docker-compose -f ${env.DC_FILE} down ${env.SERVICE_NAME} || true
-                        docker-compose -f ${env.DC_FILE} pull ${env.SERVICE_NAME}
+                        docker-compose -f ${env.DC_FILE} pull
                         docker network create golf7-network || true
                         docker-compose -f ${env.DC_FILE} up -d ${env.SERVICE_NAME}
                     """
