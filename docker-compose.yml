@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  rihon-website:
+  golf7-sale:
     image: $DOCKER_IMAGE
     container_name: $APP_NAME
     restart: unless-stopped
@@ -11,4 +11,4 @@ services:
 networks:
   default:
     external:
-      name: test-network
+      name: golf-network
