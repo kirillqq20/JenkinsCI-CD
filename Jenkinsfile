@@ -45,7 +45,7 @@ pipeline {
                 script {
                     sh """
                         docker-compose -f ${env.DC_FILE} down ${env.APP_NAME}:${env.APP_VERSION} || true
-                        docker-compose -f ${env.DC_FILE} pull ${env.APP_NAME}:${env.APP_VERSION}
+                        docker-compose -f ${env.DC_FILE} pull ${env.DOCKER_USER}/${env.APP_NAME}:${env.APP_VERSION}
                         docker network create golf-network || true
                         docker-compose -f ${env.DC_FILE} up -d ${env.APP_NAME}:${env.APP_VERSION}
                     """
