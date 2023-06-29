@@ -35,7 +35,7 @@ pipeline {
                 // Log in to Docker Hub with token
                 withDockerRegistry(url: 'https://index.docker.io/v1/', credentialsId: 'dockerhub') {
                     // Push the Docker images to Docker Hub
-                    sh "'docker push ${env.DOCKER_USER}/${env.APP_NAME}:${env.APP_VERSION}'"
+                    sh "docker push ${env.DOCKER_USER}/${env.APP_NAME}:${env.APP_VERSION}"
                 }
             }
         }
@@ -43,12 +43,12 @@ pipeline {
         stage('Deploy in local server') {
             steps {
                 script {
-                    sh """'
+                    sh """
                         docker-compose -f ${env.DC_FILE} down ${env.APP_NAME} || true
                         docker-compose -f ${env.DC_FILE} pull ${env.APP_NAME}
                         docker network create test-network || true
                         docker-compose -f ${env.DC_FILE} up -d ${env.APP_NAME}
-                    '"""
+                    """
                 }
             }
         }
