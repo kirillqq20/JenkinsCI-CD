@@ -28,14 +28,14 @@ pipeline {
                 script {
                     def previousBuildExists = false
                     try {
-                        sh "docker inspect ${DOCKER_IMAGE}"
+                        sh "docker inspect ${env.DOCKER_IMAGE}"
                         previousBuildExists = true
                     } catch (Exception ignored) {
                         // Docker image does not exist, no need to delete
                     }
 
                     if (previousBuildExists) {
-                        sh "docker rmi -f ${DOCKER_IMAGE}"
+                        sh "docker rmi -f ${env.DOCKER_IMAGE}"
                     } else {
                         echo "No previous build found, skipping deletion."
                     }
@@ -45,7 +45,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh "docker build -t ${DOCKER_IMAGE} ."
+                sh "docker build -t ${env.DOCKER_IMAGE} ."
             }
         }
 
@@ -54,7 +54,7 @@ pipeline {
                 // Log in to Docker Hub with token
                 withDockerRegistry(url: 'https://index.docker.io/v1/', credentialsId: 'dockerhub') {
                     // Push the Docker images to Docker Hub
-                    sh "docker push ${DOCKER_IMAGE}"
+                    sh "docker push ${env.DOCKER_IMAGE}"
                 }
             }
         }
@@ -63,10 +63,10 @@ pipeline {
             steps {
                 script {
                     sh """
-                        docker-compose -f \${DC_FILE} down \${APP_NAME} || true
-                        docker-compose -f \${DC_FILE} pull \${APP_NAME}
+                        docker-compose -f \${env.DC_FILE} down \${env.APP_NAME} || true
+                        docker-compose -f \${env.DC_FILE} pull \${env.APP_NAME}
                         docker network create test-network || true
-                        docker-compose -f \${DC_FILE} up -d \${APP_NAME}
+                        docker-compose -f \${env.DC_FILE} up -d \${env.APP_NAME}
                     """
                 }
             }
