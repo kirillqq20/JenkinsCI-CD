@@ -17,7 +17,8 @@ pipeline {
 
                     // Set the file-variable as an environment variable
                     env.APP_NAME = variables.app_name
-                    env.DOCKER_IMAGE = variables.docker_image
+                    env.DOCKER_USER = variables.docker_user
+                    env.APP_VERSION = variable.app_version
                     env.DC_FILE = variables.dc_file
                 }
             }
@@ -25,7 +26,7 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh "'docker build -t ${env.DOCKER_IMAGE} .'"
+                sh "'docker build -t ${env.DOCKER_USER}/${env.APP_NAME}:${env.APP_VERSION} .'"
             }
         }
 
@@ -34,7 +35,7 @@ pipeline {
                 // Log in to Docker Hub with token
                 withDockerRegistry(url: 'https://index.docker.io/v1/', credentialsId: 'dockerhub') {
                     // Push the Docker images to Docker Hub
-                    sh "'docker push ${env.DOCKER_IMAGE}'"
+                    sh "'docker push ${env.DOCKER_USER}/${env.APP_NAME}:${env.APP_VERSION}'"
                 }
             }
         }

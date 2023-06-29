@@ -1,3 +1,4 @@
 app_name: golf7-sale
-docker_image: kirillqq20/${APP_NAME}:latest
+docker_user: kirillqq20
+app_version: latest
 dc_file: docker-compose.yml
