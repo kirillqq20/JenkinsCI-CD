@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  rihon-website:
+    image: $DOCKER_IMAGE
+    container_name: $APP_NAME
+    restart: unless-stopped
+    ports:
+      - '2222:80'
+
+networks:
+  default:
+    external:
+      name: test-network

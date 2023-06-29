@@ -1,0 +1,3 @@
+app_name: golf7-sale
+docker_image: kirillqq20/${APP_NAME}:${env.BUILD_NUMBER}
+dc_file: docker-compose.yml
