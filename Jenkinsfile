@@ -26,7 +26,7 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh "'docker build -t ${env.DOCKER_USER}/${env.APP_NAME}:${env.APP_VERSION} .'"
+                sh "docker build -t ${env.DOCKER_USER}/${env.APP_NAME}:${env.APP_VERSION} ."
             }
         }
 
