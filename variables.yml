@@ -1,5 +1,5 @@
-app_name: golf7-sale
+app_name: subaru-dream
 docker_user: kirillqq20
 app_version: latest
-service_name: golf7-sale
+service_name: subaru-dream
 dc_file: docker-compose.yml
